@@ -58,7 +58,7 @@ namespace PresentationLayer.Controller
         }
 
         [HttpPut("UpdatePilot/{pilotId}")]
-        public async Task<ActionResult> UpdatePilot(PilotDto pilot, int pilotId)
+        public async Task<ActionResult> UpdatePilot(UpdatePilotDto pilot, int pilotId)
         {
             try
             {

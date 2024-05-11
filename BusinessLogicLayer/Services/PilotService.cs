@@ -123,7 +123,7 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task UpdatePilot(PilotDto pilotDto, int pilotId)
+        public async Task UpdatePilot(UpdatePilotDto pilotDto, int pilotId)
         {
             try
             {
