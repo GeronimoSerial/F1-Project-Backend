@@ -123,15 +123,81 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        // public async Task<Pilot> UpdatePilot(Pilot pilot)
-        // {
-        //     await Ok();
-        // }
+        public async Task UpdatePilot(PilotDto pilotDto, int pilotId)
+        {
+            try
+            {
+                var pilot = await _db.Pilots.FirstOrDefaultAsync(x => x.Id == pilotId);
 
-        // public async Task<Pilot> GetPilotsStats(int pilotId)
-        // {
-        //     return await Ok();
-        // }
+                if (pilot == null) throw new Exception("Pilot not found");
+
+                pilot.FullName = pilotDto.FullName;
+                pilot.Surname = pilotDto.Surname;
+                pilot.Number = pilotDto.Number;
+                pilot.Nationality = pilotDto.Nationality;
+                pilot.Description = pilotDto.Description;
+                pilot.Birthday = pilotDto.Birthday;
+                pilot.PointsThisSeason = pilotDto.PointsThisSeason;
+                pilot.PodiumsThisSeason = pilotDto.PodiumsThisSeason;
+                pilot.TotalPoints = pilotDto.TotalPoints;
+                pilot.Wins = pilotDto.Wins;
+                pilot.FastestLaps = pilotDto.FastestLaps;
+                pilot.Podiums = pilotDto.Podiums;
+                pilot.Poles = pilotDto.Poles;
+                pilot.Championships = pilotDto.Championships;
+
+                //save changes
+                _db.Pilots.Update(pilot);
+                await _db.SaveChangesAsync();
+                
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+        public async Task DeletePilot(int pilotId)
+        {
+            try
+            {
+                var pilot = await _db.Pilots.FirstOrDefaultAsync(x => x.Id == pilotId);
+                if (pilot == null) throw new Exception("Pilot not found");
+                _db.Pilots.Remove(pilot);
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<PilotStatsDto> GetPilotStats(string pilotName)
+        {
+            pilotName = pilotName.ToLower(); // Convertir el nombre de piloto a minúsculas
+
+            var allPilots = await _db.Pilots.ToListAsync(); // Obtener todos los pilotos
+
+            var pilot = allPilots.FirstOrDefault(p => p.FullName.ToLower().Contains(pilotName)); // Buscar coincidencias en FullName pasado a minusculas
+            
+            if(pilot == null) throw new ArgumentException("Pilot not found", nameof(pilotName));
+
+            var pilotStatsDto = new PilotStatsDto
+            {
+                FullName = pilot.FullName,
+                PointsThisSeason = pilot.PointsThisSeason,
+                PodiumsThisSeason = pilot.PodiumsThisSeason,
+                TotalPoints = pilot.TotalPoints,
+                Wins = pilot.Wins,
+                FastestLaps = pilot.FastestLaps,
+                Podiums = pilot.Podiums,
+                Poles = pilot.Poles,
+                Championships = pilot.Championships,
+            };
+            return pilotStatsDto;
         
+        }
+
     }   
 }

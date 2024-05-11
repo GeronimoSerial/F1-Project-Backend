@@ -9,8 +9,9 @@ namespace BusinessLogicLayer.Services
         Task AddPilot(PilotDto pilotDto);
         Task<List<PilotDto>> GetAllPilots(FilterPilotDto filter);
         Task<PilotDto> GetPilotById(int pilotId);
-        // Task<Pilot> UpdatePilot(Pilot pilot);
-        // Task<Pilot> GetPilotsStats(int pilotId);
+        Task UpdatePilot(PilotDto pilot, int pilotId);
+        Task DeletePilot(int pilotId);
+        Task<PilotStatsDto> GetPilotStats(string pilotName);
 
         //Task <List<Pilot>> GetPilotsByTeamId(int teamId);
 

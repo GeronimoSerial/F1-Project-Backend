@@ -57,7 +57,19 @@ namespace PresentationLayer.Controller
             }
         }
 
-
+        [HttpPut("UpdatePilot/{pilotId}")]
+        public async Task<ActionResult> UpdatePilot(PilotDto pilot, int pilotId)
+        {
+            try
+            {
+                await _pilotService.UpdatePilot(pilot, pilotId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("GetAllPilots")]
         public async Task<ActionResult> GetAllPilots([FromQuery] FilterPilotDto filter)
@@ -77,18 +89,23 @@ namespace PresentationLayer.Controller
                 return Ok(pilot);
             }
 
-
-//         [HttpGet("GetPilotsStats/{pilotId}")]
-
-//         public async Task<ActionResult<Pilot>> GetPilotsStats(int pilotId)
-//         {
-//             var pilot = await _db.Pilots.FirstOrDefaultAsync(x=>x.Id == pilotId);
-//             return Ok(pilot);
-
-
-//         }
+        [HttpDelete("DeletePilot/{pilotId}")]
         
-//     }
-// }
+            public async Task<ActionResult> DeletePilot(int pilotId)
+            {
+                await _pilotService.DeletePilot(pilotId);
+                return Ok();
+            }
+
+        [HttpGet("GetPilotStats/{pilotName}")]
+
+        public async Task<ActionResult<PilotStatsDto>> GetPilotStats(string pilotName)
+        {
+            var pilot = await _pilotService.GetPilotStats(pilotName);
+            return Ok(pilot);
+        }
+
+        //     }
+        // }
     }
 }
