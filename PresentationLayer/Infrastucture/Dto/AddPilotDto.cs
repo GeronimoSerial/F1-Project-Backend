@@ -1,6 +1,6 @@
 ﻿namespace PresentationLayer.Infrastucture.Dto
 {
-    public class AddPetDto
+    public class AddPilotDto
     {
         public string FullName { get; set; }
         public string? Surname { get; set; }
@@ -20,8 +20,8 @@
 
         public int Championships { get; set; }
         public int FastestLaps { get; set; }
-
         public int Poles { get; set; }
+        public int TeamId { get; set; }
     }
 
 }

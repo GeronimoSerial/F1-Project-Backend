@@ -26,7 +26,7 @@
         public int Poles { get; set; }
 
 
-        public int? TeamId { get; set; }
+        public int TeamId { get; set; }
     }
 
 }

@@ -1,6 +1,9 @@
 using System.Reflection;
+using AutoMapper;
+using BusinessLogicLayer.Dto;
 using BusinessLogicLayer.Services;
 using DataStorageLayer.DatabaseContext;
+using DataStorageLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using PresentationLayer.Infrastucture.AutoMapper;
 
@@ -16,9 +19,17 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<F1DbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<iPilotService, PilotService>();
+builder.Services.AddScoped<iTeamService, TeamService>();
 builder.Services.AddAutoMapper(assemblies: new Assembly[] { typeof(AutoMapperProfile).Assembly });
 
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = scope.ServiceProvider.GetRequiredService<F1DbContext>();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -10,6 +10,8 @@ namespace PresentationLayer.Infrastucture.AutoMapper
         public AutoMapperProfile()
         {
             CreateMap<Pilot, PilotDto>();
+
+            CreateMap<Team, TeamDto>();
             
         }
     }

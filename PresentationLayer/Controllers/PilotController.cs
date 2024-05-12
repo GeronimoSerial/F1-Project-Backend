@@ -46,7 +46,9 @@ namespace PresentationLayer.Controller
                     Wins = pilotDto.Wins,
                     Championships = pilotDto.Championships,
                     FastestLaps = pilotDto.FastestLaps,
-                    Poles = pilotDto.Poles
+                    Poles = pilotDto.Poles,
+                    TeamId = pilotDto.TeamId
+
                 };
                 await _pilotService.AddPilot(pilot);
                 return Ok();

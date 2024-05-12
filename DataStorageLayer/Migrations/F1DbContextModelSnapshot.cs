@@ -69,7 +69,7 @@ namespace DataStorageLayer.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<int>("TotalPoints")
@@ -116,7 +116,9 @@ namespace DataStorageLayer.Migrations
                 {
                     b.HasOne("DataStorageLayer.Entities.Team", "Team")
                         .WithMany("Pilots")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
                 });
