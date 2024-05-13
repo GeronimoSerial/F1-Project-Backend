@@ -16,25 +16,27 @@ namespace PresentationLayer.Controllers
     public class TeamController : ControllerBase
     {
         private readonly iTeamService _teamService;
-        private readonly F1DbContext _db;
 
-        public TeamController(F1DbContext db, iTeamService teamService)
+        public TeamController(iTeamService teamService)
         {
             _teamService = teamService;
-            _db = db;
+          
         }
 
         [HttpPost("AddTeam")]
-        public async Task<ActionResult> AddTeam(AddTeamDto teamDto)
+        public async Task<ActionResult> AddTeam([FromForm]AddTeamDto teamDto)
         {
             var team = new TeamDto 
             {
-                Id = teamDto.Id,
                 Name = teamDto.Name,
                 Nationality = teamDto.Nationality,
-                Wins = teamDto.Wins,
+                TeamChief = teamDto.TeamChief,
+                Chassis = teamDto.Chassis,
+                Engine = teamDto.Engine,
                 Championships = teamDto.Championships,
-                
+                HighestPosition = teamDto.HighestPosition,
+                Poles = teamDto.Poles,
+                FastestLaps = teamDto.FastestLaps
             };
             await _teamService.AddTeam(team);
             return Ok();
@@ -47,31 +49,4 @@ namespace PresentationLayer.Controllers
             return Ok(team);
         }
     }
-    //    [HttpGet]
-    //    public ActionResult<IEnumerable<string>> Get()
-    //    {
-    //        return new string[] { "value1", "value2" };
-    //    }
-
-    //    [HttpGet("{id}")]
-    //    public ActionResult<string> Get(int id)
-    //    {
-    //        return "value";
-    //    }
-
-    //    [HttpPost]
-    //    public void Post([FromBody] string value)
-    //    {
-    //    }
-
-    //    [HttpPut("{id}")]
-    //    public void Put(int id, [FromBody] string value)
-    //    {
-    //    }
-
-    //    [HttpDelete("{id}")]
-    //    public void Delete(int id)
-    //    {
-    //    }
-    //}
 }

@@ -32,9 +32,14 @@ namespace BusinessLogicLayer.Services
                 Id = teamDto.Id,
                 Name = teamDto.Name,
                 Nationality = teamDto.Nationality,
-                Wins = teamDto.Wins,
+                HighestPosition = teamDto.HighestPosition,
                 Championships = teamDto.Championships,
-                
+                Poles = teamDto.Poles,
+                Chassis = teamDto.Chassis,
+                Engine = teamDto.Engine,
+                TeamChief = teamDto.TeamChief,
+                FastestLaps = teamDto.FastestLaps
+
             };
             _db.Teams.Add(team);
             await _db.SaveChangesAsync();
@@ -46,6 +51,7 @@ namespace BusinessLogicLayer.Services
             
             var pilotsDto = new List<PilotDto>();
             pilotsDto = _mapper.Map<List<PilotDto>>(pilots);
+           
             //var pilotsDto = pilots.Select(p => new PilotDto
             //{
             //    Id = p.Id,
@@ -78,8 +84,13 @@ namespace BusinessLogicLayer.Services
                     Id = team.Id,
                     Name = team.Name,
                     Nationality = team.Nationality,
-                    Wins = team.Wins,
+                    HighestPosition = team.HighestPosition,
                     Championships = team.Championships,
+                    Poles = team.Poles,
+                    Chassis = team.Chassis,
+                    Engine = team.Engine,
+                    TeamChief = team.TeamChief,
+                    FastestLaps = team.FastestLaps,
                     Pilots = pilotsDto
                 };
 
