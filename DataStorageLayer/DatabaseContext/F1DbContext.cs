@@ -14,10 +14,10 @@ namespace DataStorageLayer.DatabaseContext
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Team>()
-                .HasMany(p => p.Pilots)
-                .WithOne(t => t.Team)
-                .HasForeignKey(t => t.TeamId);
+            //modelBuilder.Entity<Team>()
+            //    .HasMany(p => p.Pilots)
+            //    .WithOne(t => t.Team)
+            //    .HasForeignKey(t => t.TeamId);
 
         }
 

@@ -4,6 +4,7 @@ using DataStorageLayer.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataStorageLayer.Migrations
 {
     [DbContext(typeof(F1DbContext))]
-    partial class F1DbContextModelSnapshot : ModelSnapshot
+    [Migration("20240512224139_AlterTable_Pilot_RemovePodiumsThisSeasson")]
+    partial class AlterTable_Pilot_RemovePodiumsThisSeasson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,8 +64,8 @@ namespace DataStorageLayer.Migrations
                     b.Property<int>("Podiums")
                         .HasColumnType("int");
 
-                    b.Property<float>("PointsThisSeason")
-                        .HasColumnType("real");
+                    b.Property<int>("PointsThisSeason")
+                        .HasColumnType("int");
 
                     b.Property<int>("Poles")
                         .HasColumnType("int");
@@ -73,8 +76,8 @@ namespace DataStorageLayer.Migrations
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<float>("TotalPoints")
-                        .HasColumnType("real");
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
 
                     b.Property<int>("Wins")
                         .HasColumnType("int");
