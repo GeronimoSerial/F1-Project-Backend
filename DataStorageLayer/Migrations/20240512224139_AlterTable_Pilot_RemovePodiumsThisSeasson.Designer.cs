@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataStorageLayer.Migrations
 {
     [DbContext(typeof(F1DbContext))]
-    [Migration("20240508213925_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240512224139_AlterTable_Pilot_RemovePodiumsThisSeasson")]
+    partial class AlterTable_Pilot_RemovePodiumsThisSeasson
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,10 @@ namespace DataStorageLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("HighestPosition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nationality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -58,9 +62,6 @@ namespace DataStorageLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Podiums")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PodiumsThisSeason")
                         .HasColumnType("int");
 
                     b.Property<int>("PointsThisSeason")
@@ -72,6 +73,9 @@ namespace DataStorageLayer.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TotalPoints")
                         .HasColumnType("int");
 
@@ -80,7 +84,71 @@ namespace DataStorageLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TeamId");
+
                     b.ToTable("Pilots");
+                });
+
+            modelBuilder.Entity("DataStorageLayer.Entities.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Championships")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Chassis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Engine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FastestLaps")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HighestPosition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Poles")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TeamChief")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("DataStorageLayer.Entities.Pilot", b =>
+                {
+                    b.HasOne("DataStorageLayer.Entities.Team", "Team")
+                        .WithMany("Pilots")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("DataStorageLayer.Entities.Team", b =>
+                {
+                    b.Navigation("Pilots");
                 });
 #pragma warning restore 612, 618
         }

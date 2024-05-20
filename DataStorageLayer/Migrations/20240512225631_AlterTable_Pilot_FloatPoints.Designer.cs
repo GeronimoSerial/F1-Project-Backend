@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataStorageLayer.Migrations
 {
     [DbContext(typeof(F1DbContext))]
-    [Migration("20240508215154_Added_Pet_Table")]
-    partial class Added_Pet_Table
+    [Migration("20240512225631_AlterTable_Pilot_FloatPoints")]
+    partial class AlterTable_Pilot_FloatPoints
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,10 @@ namespace DataStorageLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("HighestPosition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nationality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -60,11 +64,8 @@ namespace DataStorageLayer.Migrations
                     b.Property<int>("Podiums")
                         .HasColumnType("int");
 
-                    b.Property<int>("PodiumsThisSeason")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PointsThisSeason")
-                        .HasColumnType("int");
+                    b.Property<float>("PointsThisSeason")
+                        .HasColumnType("real");
 
                     b.Property<int>("Poles")
                         .HasColumnType("int");
@@ -72,11 +73,11 @@ namespace DataStorageLayer.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalPoints")
-                        .HasColumnType("int");
+                    b.Property<float>("TotalPoints")
+                        .HasColumnType("real");
 
                     b.Property<int>("Wins")
                         .HasColumnType("int");
@@ -99,6 +100,21 @@ namespace DataStorageLayer.Migrations
                     b.Property<int>("Championships")
                         .HasColumnType("int");
 
+                    b.Property<string>("Chassis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Engine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FastestLaps")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HighestPosition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -107,8 +123,12 @@ namespace DataStorageLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Wins")
+                    b.Property<int>("Poles")
                         .HasColumnType("int");
+
+                    b.Property<string>("TeamChief")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -119,7 +139,9 @@ namespace DataStorageLayer.Migrations
                 {
                     b.HasOne("DataStorageLayer.Entities.Team", "Team")
                         .WithMany("Pilots")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
                 });

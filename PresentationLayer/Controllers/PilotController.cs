@@ -27,7 +27,7 @@ namespace PresentationLayer.Controller
 
       
         [HttpPost("AddPilot")]
-        public async Task<ActionResult> AddPilot([FromForm]AddPilotDto pilotDto)
+        public async Task<ActionResult> AddPilot(AddPilotDto pilotDto)
         {
             try
             {
@@ -40,13 +40,15 @@ namespace PresentationLayer.Controller
                     Description = pilotDto.Description,
                     Birthday = pilotDto.Birthday,
                     PointsThisSeason = pilotDto.PointsThisSeason,
-                    PodiumsThisSeason = pilotDto.PodiumsThisSeason,
                     Podiums = pilotDto.Podiums,
+                    HighestPosition = pilotDto.HighestPosition,
                     TotalPoints = pilotDto.TotalPoints,
                     Wins = pilotDto.Wins,
                     Championships = pilotDto.Championships,
                     FastestLaps = pilotDto.FastestLaps,
-                    Poles = pilotDto.Poles
+                    Poles = pilotDto.Poles,
+                    TeamId = pilotDto.TeamId
+
                 };
                 await _pilotService.AddPilot(pilot);
                 return Ok();

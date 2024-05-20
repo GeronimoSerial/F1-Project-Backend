@@ -31,9 +31,9 @@ namespace BusinessLogicLayer.Services
                 Nationality = pilotDto.Nationality,
                 Birthday = pilotDto.Birthday,
                 PointsThisSeason = pilotDto.PointsThisSeason,
-                PodiumsThisSeason = pilotDto.PodiumsThisSeason,
                 TotalPoints = pilotDto.TotalPoints,
                 Wins = pilotDto.Wins,
+                HighestPosition = pilotDto.HighestPosition,
                 FastestLaps = pilotDto.FastestLaps,
                 Podiums = pilotDto.Podiums,
                 Poles = pilotDto.Poles,
@@ -103,9 +103,9 @@ namespace BusinessLogicLayer.Services
                         Nationality = pilot.Nationality,
                         Birthday = pilot.Birthday,
                         PointsThisSeason = pilot.PointsThisSeason,
-                        PodiumsThisSeason = pilot.PodiumsThisSeason,
                         TotalPoints = pilot.TotalPoints,
                         Wins = pilot.Wins,
+                        HighestPosition = pilot.HighestPosition,
                         FastestLaps = pilot.FastestLaps,
                         Podiums = pilot.Podiums,
                         Poles = pilot.Poles,
@@ -138,9 +138,9 @@ namespace BusinessLogicLayer.Services
                 pilot.Description = pilotDto.Description;
                 pilot.Birthday = pilotDto.Birthday;
                 pilot.PointsThisSeason = pilotDto.PointsThisSeason;
-                pilot.PodiumsThisSeason = pilotDto.PodiumsThisSeason;
                 pilot.TotalPoints = pilotDto.TotalPoints;
                 pilot.Wins = pilotDto.Wins;
+                pilot.HighestPosition = pilotDto.HighestPosition;
                 pilot.FastestLaps = pilotDto.FastestLaps;
                 pilot.Podiums = pilotDto.Podiums;
                 pilot.Poles = pilotDto.Poles;
@@ -187,12 +187,12 @@ namespace BusinessLogicLayer.Services
             {
                 FullName = pilot.FullName,
                 PointsThisSeason = pilot.PointsThisSeason,
-                PodiumsThisSeason = pilot.PodiumsThisSeason,
                 TotalPoints = pilot.TotalPoints,
                 Wins = pilot.Wins,
                 FastestLaps = pilot.FastestLaps,
                 Podiums = pilot.Podiums,
                 Poles = pilot.Poles,
+                HighestPosition = pilot.HighestPosition,
                 Championships = pilot.Championships,
             };
             return pilotStatsDto;

@@ -12,6 +12,14 @@ namespace DataStorageLayer.DatabaseContext
         public F1DbContext(DbContextOptions<F1DbContext> options) : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Team>()
+            //    .HasMany(p => p.Pilots)
+            //    .WithOne(t => t.Team)
+            //    .HasForeignKey(t => t.TeamId);
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
