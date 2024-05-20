@@ -125,6 +125,16 @@ namespace BusinessLogicLayer.Services
 
             return teamDto;
         }
+
+        //Delete teams by teamId 
+
+        public async Task DeleteTeam(int teamId)
+        {
+            var team = await _db.Teams.FirstOrDefaultAsync(x => x.Id == teamId);
+            if (team == null) throw new Exception("Team not found");
+            _db.Teams.Remove(team);
+            await _db.SaveChangesAsync();
+        }
             
             
     }

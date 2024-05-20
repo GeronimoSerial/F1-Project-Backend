@@ -76,5 +76,14 @@ namespace PresentationLayer.Controllers
             var team = await _teamService.GetTeam(teamId);
             return Ok(team);
         }
+
+
+        [HttpDelete("DeleteTeam/{teamId}")]
+
+        public async Task<ActionResult> DeleteTeam(int teamId)
+        {
+            await _teamService.DeleteTeam(teamId);
+            return Ok();
+        }
     }
 }
